@@ -6,13 +6,15 @@ import { useSearchParams } from 'next/navigation'
 
 import { cn } from '@/lib/utils'
 
+//@ts-ignore
 function randomIndex(array: Array) {
 	return Math.floor(Math.random() * array.length) as number
 }
 
 export default function Attention1() {
+	const searchParams = useSearchParams()
+
 	function isDebugging() {
-		const searchParams = useSearchParams()
 		const debugParam = searchParams.get('debug')
 
 		if (debugParam && debugParam === 'true') {
@@ -60,14 +62,18 @@ export default function Attention1() {
 
 		// Set Questions Map
 		setQuestions(
+			//@ts-ignore
 			Array(20 * 20)
+				//@ts-ignore
 				.fill()
 				.map(() => randomIndex(options))
 		)
 	}, [])
 
 	// Get Selected Item Index
+	//@ts-ignore
 	function selectedItemIndex(value: number, array: Array) {
+		//@ts-ignore
 		const index = array.findIndex((selectValue) => selectValue === value)
 
 		if (index === -1) {
@@ -109,6 +115,7 @@ export default function Attention1() {
 		const itemIndex = selectedItemIndex(position, userSelection)
 
 		if (itemIndex === false) {
+			//@ts-ignore
 			setUserSelection((userSelection) => [...userSelection, position])
 		} else {
 			const slicedArr = [
@@ -120,10 +127,14 @@ export default function Attention1() {
 	}
 
 	const [userScore, setUserScore] = useState(null)
+	//@ts-ignore
 	function submitAnswer(correctArray, selectionArray) {
 		return {
+			//@ts-ignore
 			correctSelection: correctArray.filter((x) => selectionArray.includes(x)),
+			//@ts-ignore
 			wrongSelection: selectionArray.filter((x) => !correctArray.includes(x)),
+			//@ts-ignore
 			missedSelection: correctArray.filter((x) => !selectionArray.includes(x)),
 		}
 	}
@@ -136,6 +147,7 @@ export default function Attention1() {
 
 			// Analyse and Set User Score
 			const score = submitAnswer(answersIndex, userSelection)
+			//@ts-ignore
 			setUserScore(score)
 		}
 	}
@@ -254,19 +266,28 @@ export default function Attention1() {
 							<div className={cn('p-4 bg-green-100 rounded-lg')}>
 								<h4 className={cn('text-base font-bold')}>Acertos</h4>
 								<span className={cn('text-3xl font-bold text-green-500')}>
-									{userScore.correctSelection.length}
+									{
+										//@ts-ignore
+										userScore.correctSelection.length
+									}
 								</span>
 							</div>
 							<div className={cn('p-4 bg-red-100 rounded-lg')}>
 								<h4 className={cn('text-base font-bold')}>Marcado errado</h4>
 								<span className={cn('text-3xl font-bold text-red-500')}>
-									{userScore.wrongSelection.length}
+									{
+										//@ts-ignore
+										userScore.wrongSelection.length
+									}
 								</span>
 							</div>
 							<div className={cn('p-4 bg-orange-100 rounded-lg')}>
 								<h4 className={cn('text-base font-bold')}>Não viu</h4>
 								<span className={cn('text-3xl font-bold text-orange-500')}>
-									{userScore.missedSelection.length}
+									{
+										//@ts-ignore
+										userScore.missedSelection.length
+									}
 								</span>
 							</div>
 						</div>
@@ -283,9 +304,27 @@ export default function Attention1() {
 					<hr />
 					{submmited && userScore && (
 						<>
-							<pre>Correct: {JSON.stringify(userScore.correctSelection)}</pre>
-							<pre>Wrong: {JSON.stringify(userScore.wrongSelection)}</pre>
-							<pre>Missed: {JSON.stringify(userScore.missedSelection)}</pre>
+							<pre>
+								Correct:{' '}
+								{
+									//@ts-ignore
+									JSON.stringify(userScore.correctSelection)
+								}
+							</pre>
+							<pre>
+								Wrong:{' '}
+								{
+									//@ts-ignore
+									JSON.stringify(userScore.wrongSelection)
+								}
+							</pre>
+							<pre>
+								Missed:{' '}
+								{
+									//@ts-ignore
+									JSON.stringify(userScore.missedSelection)
+								}
+							</pre>
 						</>
 					)}
 				</>
