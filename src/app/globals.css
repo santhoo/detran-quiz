@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-	@apply bg-slate-200 text-zinc-800;
+a {
+	@apply text-blue-700 hover:underline;
 }
