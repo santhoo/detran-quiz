@@ -21,9 +21,18 @@ export default function Home() {
 
 				<hr className="my-6" />
 
-				<p className="text-sm text-zinc-400">
-					Mockup project by Santiago Sipoli
-				</p>
+				<div className="flex flex-col">
+					<p className="text-sm text-zinc-400">
+						Projeto fictício por Santiago Sipoli
+					</p>
+
+					<Link
+						className="text-sm"
+						href="https://github.com/santhoo/detran-quiz"
+					>
+						Ver no GitHub
+					</Link>
+				</div>
 			</div>
 		</div>
 	)
